@@ -5,6 +5,7 @@ import cardLogo from "/card-logo.svg"
 import cardBack from "/bg-card-back.png"
 import cardFront from "/bg-card-front.png"
 import check from "/icon-complete.svg"
+
 const inputs = [
   {
     id:"name",
@@ -24,7 +25,7 @@ const inputs = [
     eid: "nid",
     type:"number"
 
-  } 
+  }
 ]
 const inputs2 = [
   {
@@ -129,18 +130,14 @@ const inputs3 = [
       {inputs.map((input) => { 
         return <label class="text-vd capitalize text-[16px] mb-[0.5rem]">{input.label}</label> <input type="text" maxlength="19" autocomplete="off" id={input.id} class={input.class} placeholder={input.placeholder}/> <span class="mt-[-1.5rem] mb-[1rem] text-[13px] text-red" id={input.eid}>{input.error}</span>
       })}
-      <section class="flex mb-[1rem]">
-        <div class="">
-          {inputs2.map((input) => {   
-            return <div class="flex absolute"><label class="text-vd capitalize text-[16px] mb-[1rem]">{input.label}</label></div>
-          })}
-          <div class="flex">  
-            {inputs2.map((input) => {
-              return <div class="flex flex-col"><input type="text" maxlength="2" id={input.id} class={input.class} placeholder={input.placeholder}/>
-              <span class="text-[13px] text-red" id={input.mid}>{input.error}</span></div>
-            })}  
-          </div>
-        </div>
+      <div class="flex mb-[1rem]">
+        {inputs2.map((input) => {   
+          return <div class="flex absolute"><label class="text-vd capitalize text-[16px] mb-[1rem]">{input.label}</label></div>
+        })}
+        {inputs2.map((input) => {
+          return <div class="flex flex-col"><input type="text" maxlength="2" id={input.id} class={input.class} placeholder={input.placeholder}/>
+          <span class="text-[13px] text-red" id={input.mid}>{input.error}</span></div>
+        })}  
         <div class="flex flex-col ml-[1rem]">
           {inputs3.map((input) => {
             return <label class="text-vd uppercase text-[16px] mb-[0.75rem] ml-[0rem]">{input.label}</label> <input type="text" maxlength="4" id={input.id} class={input.class} placeholder={input.placeholder}/>
@@ -149,7 +146,7 @@ const inputs3 = [
             return <span class=" text-[13px] text-red" id="cvcS">{input.error}</span>
           })}
         </div>
-      </section>
+      </div>
       <button class="bg-vd text-white h-[3rem] mt-[1rem] rounded-[7px]" id="btn">
         Confirm
       </button>
@@ -183,14 +180,12 @@ const inputs3 = [
   };
   const name = document.getElementById("name");
   const nameS = document.getElementById("naid");
-  const nameRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
-  const nameR = new RegExp(nameRegex)
+  const nameR = new RegExp(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/)
   name.addEventListener("input", (event) => inputHandler(event, name, nameS, nameR, "nameZ"));
   
   const number = document.getElementById("number");
   const numS = document.getElementById("nid");
-  const numberRegexM = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
-  const numberRM = new RegExp(numberRegexM)
+  const numberRM = new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/)
   number.addEventListener("input", (event) => inputHandler(event, number, numS, numberRM, "numberZ"));
   const month = document.getElementById("month");
   const mid = document.getElementById("mid");
@@ -200,14 +195,12 @@ const inputs3 = [
   year.addEventListener("input", (event) => inputHandler(event, year, yid, null, "expYZ"));
 
 
-  const cvcRegex = /^[0-9]{3,4}$/
-  const cvcR = new RegExp(cvcRegex)
+  const cvcR = new RegExp(/^[0-9]{3,4}$/)
   const cvc = document.getElementById("cvc");
   const cvcS = document.getElementById("cvcS");
   cvc.addEventListener("input", (event) => inputHandler(event, cvc, cvcS, cvcR, "cvcZ"));
 
   const form = document.getElementById("form")
-  const btn = document.getElementById("btn")
   var err1 = false
   var err2 = false
   var err3 = false
@@ -219,7 +212,7 @@ const inputs3 = [
     var inputValue = event.target.value
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
-      if(err1 == true && err2 == true && err3 == true && err4 == true  && err5 == true){
+      if(err1 == true &&  err2 == true && err3 == true && err4 == true  && err5 == true){
         p1.classList.add("hidden")
         p2.classList.remove("hidden")
       }
@@ -255,11 +248,10 @@ const inputs3 = [
           err1 = true
           input.style.borderColor = "hsl(0, 100%, 66%,0)"
           span.innerHTML = ""
-          btn.disabled = false
           if(inputValue.length == 1){
             document.getElementById(inqe).innerHTML = ("0"+String(inputValue))
           }
-          else if(inputValue.length == 2){
+          else if(inputValue.length >= 2){
             document.getElementById(inqe).innerHTML = (""+String(inputValue))
           }
         }
@@ -277,7 +269,7 @@ const inputs3 = [
           input.style.borderColor = "hsl(0, 100%, 66%,0)"
           document.getElementById(inqe).innerHTML = ""
           span.innerHTML = ""
-          btn.disabled = false
+          document.getElementById(inqe).innerHTML = (String(inputValue))
           if(inputValue.length == 1){
             document.getElementById(inqe).innerHTML = ("/ 0"+String(inputValue))
           }
@@ -297,10 +289,14 @@ const inputs3 = [
         document.getElementById(inqe).innerHTML = ""
       }
       else if (input == name){
+        document.getElementById(inqe).innerHTML = ''
+
         err4 = false
       }
       else if (input == cvc){
         err5 = false
+        document.getElementById(inqe).innerHTML = ''
+
       }
     }
     else if(regex.test(inputValue.replace(/\s+/g, '')) == false){
@@ -316,15 +312,15 @@ const inputs3 = [
         const mask = IMask(number, maskOptions)
         document.getElementById(inqe).innerHTML = String(mask.value)
       }
-      else{
-        err3 = false
-        document.getElementById(inqe).innerHTML = inputValue
-      }
-      if (input == name){
+      else if (input == name){
         err4 = false
+        document.getElementById(inqe).innerHTML = String(inputValue)
+
       }
       else if (input == cvc){
         err5 = false
+        document.getElementById(inqe).innerHTML = String(inputValue)
+
       }
     }
     
@@ -341,9 +337,11 @@ const inputs3 = [
       }
       else if (input == name){
         err4 = true
+        document.getElementById(inqe).innerHTML = String(inputValue)
       }
       else if (input == cvc){
         err5 = true
+        document.getElementById(inqe).innerHTML = String(inputValue)
       }
     }
   }
