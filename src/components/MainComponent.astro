@@ -1,0 +1,378 @@
+---
+import bgPic from "/bg-main-desktop.png"
+import cardLogo from "/card-logo.svg"
+import cardBack from "/bg-card-back.png"
+import cardFront from "/bg-card-front.png"
+import check from "/icon-complete.svg"
+const inputs = [
+  {
+    id:"name",
+    class:"cardholder-name outline-none nw mb-[2rem] h-[3rem] w-[27.5rem] pl-[1rem] rounded-[6px] border-transparent placeholder:text-lg",
+    placeholder:"e.g. Jane Appleseed",
+    label:"cardholder name",
+    error:"",
+    eid: "naid",
+    type:"text"
+  },
+  {
+    id:"number",
+    class:"card-number outline-none  mb-[2rem] nw h-[3rem] w-[27.5rem] pl-[1rem] rounded-[6px] border-transparent placeholder:text-lg",
+    placeholder:"e.g. 1234 5678 1902 3456",
+    label:"card number",
+    error:"",
+    eid: "nid",
+    type:"number"
+
+  } 
+]
+const inputs2 = [
+  {
+    id:"month",
+    class:"exp-month outline-none mt-[2rem] mr-[1rem] nw flex h-[3rem] w-[6rem]  pl-[1rem]  rounded-[7px] placeholder:text-lg",
+    placeholder:"MM",
+    label:"exp. date(MM/YY)",
+    error:"",
+    mid:"mid",
+    type:"number"
+  },
+  {
+    id:"year",
+    class:"exp-year outline-none flex mt-[2rem] nw mr-[0rem] h-[3rem] w-[6rem] pl-[1rem] rounded-[7px] placeholder:text-lg",
+    placeholder:"YY",
+    error:"",
+    mid: "yid",
+    type:"number"
+  }
+  
+]
+const inputs3 = [
+  {
+    id: "cvc",
+    class:"cvc outline-none  h-[3rem] nw w-[13.75rem] mt-[-0.3rem] pl-[1rem] rounded-[7px] placeholder:text-lg",
+    label: "cvc",
+    placeholder: "e.g. 123",
+    error:"",
+    type:"number"
+  }
+]
+
+---
+<main class="flex">
+  <section class="">
+    <img src={bgPic} alt="background-picture" class="h-[100vh]"/>
+    <img 
+    src={cardLogo} alt="card-logo" 
+    class="
+      card-logo 
+      absolute 
+      z-[2] 
+      top-[14rem] 
+      left-[16rem]
+    "/>
+    <img src={cardFront} alt="card-front" class="
+      card-front 
+      absolute 
+      top-[12rem] 
+      left-[14rem] 
+      z-[1]
+    "/>
+    <p class="
+      card-number 
+      text-[30px] 
+      z-[2] 
+      absolute 
+      top-[20rem] 
+      left-[16rem] 
+      text-white 
+      tracking-[2px]
+    " id="numberZ">0000 0000 0000 0000</p>
+    <p class="
+      name z-[2] 
+      absolute 
+      top-[24rem] 
+      left-[16rem] 
+      uppercase 
+      text-white
+    " id="nameZ">Jane Appleseed</p>
+    <p class="
+      exp z-[2] 
+      absolute 
+      top-[24rem] 
+      left-[36.5rem] 
+      text-white
+    "id="expMZ">01</p>
+    <p class="
+      exp z-[2] 
+      absolute 
+      top-[24rem] 
+      left-[38rem] 
+      text-white
+    "id="expYZ">/ 22</p>
+    <img src={cardBack} alt="card-back" class="
+      card-back 
+      absolute 
+      top-[32rem] 
+      left-[22rem]
+    "/>
+    <p class="
+      cvc 
+      z-[2] 
+      absolute 
+      top-[38.83rem] 
+      left-[44.5rem] 
+      text-white
+    "id="cvcZ">123</p>
+  </section>
+  <section class="ml-[35rem] flex items-center justify-center outline-1" id="po">
+    <form class="flex flex-col" id="form">
+      {inputs.map((input) => { 
+        return <label class="text-vd capitalize text-[16px] mb-[0.5rem]">{input.label}</label> <input type="text" maxlength="19" autocomplete="off" id={input.id} class={input.class} placeholder={input.placeholder}/> <span class="mt-[-1.5rem] mb-[1rem] text-[13px] text-red" id={input.eid}>{input.error}</span>
+      })}
+      <section class="flex mb-[1rem]">
+        <div class="">
+          {inputs2.map((input) => {   
+            return <div class="flex absolute"><label class="text-vd capitalize text-[16px] mb-[1rem]">{input.label}</label></div>
+          })}
+          <div class="flex">  
+            {inputs2.map((input) => {
+              return <div class="flex flex-col"><input type="text" maxlength="2" id={input.id} class={input.class} placeholder={input.placeholder}/>
+              <span class="text-[13px] text-red" id={input.mid}>{input.error}</span></div>
+            })}  
+          </div>
+        </div>
+        <div class="flex flex-col ml-[1rem]">
+          {inputs3.map((input) => {
+            return <label class="text-vd uppercase text-[16px] mb-[0.75rem] ml-[0rem]">{input.label}</label> <input type="text" maxlength="4" id={input.id} class={input.class} placeholder={input.placeholder}/>
+          })}
+          {inputs3.map((input) => {
+            return <span class=" text-[13px] text-red" id="cvcS">{input.error}</span>
+          })}
+        </div>
+      </section>
+      <button class="bg-vd text-white h-[3rem] mt-[1rem] rounded-[7px]" id="btn">
+        Confirm
+      </button>
+    </form>
+  </section>
+  <section class="ml-[40rem] flex flex-col items-center justify-center hidden" id="pt">
+    <img src={check} alt="checkmark"/>
+    <span class="text-[30px] mt-[1.8rem] text-vd tracking-[2px] uppercase">thank you!</span>
+    <span class="text-[20px] mt-[0.5rem] text-dg tracking-[1px]">We've added your card details</span>
+    <button class="bg-vd mt-[2.5rem] text-white h-[3rem] w-[25rem] rounded-[7px]" id="btn2">
+      Continue
+    </button>
+  </section>
+</main>
+
+<script type="module">
+  const animation = [
+    {
+      transform: "translate(4px)"
+    },
+    {
+      transform: "translate(-4px)"
+    },
+    {
+      transform: "translate(4px)"
+    },
+  ];
+  const animationDuration = {
+    duration: 250,
+    iterations: 1,
+  };
+  const name = document.getElementById("name");
+  const nameS = document.getElementById("naid");
+  const nameRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+  const nameR = new RegExp(nameRegex)
+  name.addEventListener("input", (event) => inputHandler(event, name, nameS, nameR, "nameZ"));
+  
+  const number = document.getElementById("number");
+  const numS = document.getElementById("nid");
+  const numberRegexM = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+  const numberRM = new RegExp(numberRegexM)
+  number.addEventListener("input", (event) => inputHandler(event, number, numS, numberRM, "numberZ"));
+  const month = document.getElementById("month");
+  const mid = document.getElementById("mid");
+  month.addEventListener("input", (event) => inputHandler(event, month, mid, null, "expMZ"));
+  const year = document.getElementById("year");
+  const yid = document.getElementById("yid");
+  year.addEventListener("input", (event) => inputHandler(event, year, yid, null, "expYZ"));
+
+
+  const cvcRegex = /^[0-9]{3,4}$/
+  const cvcR = new RegExp(cvcRegex)
+  const cvc = document.getElementById("cvc");
+  const cvcS = document.getElementById("cvcS");
+  cvc.addEventListener("input", (event) => inputHandler(event, cvc, cvcS, cvcR, "cvcZ"));
+
+  const form = document.getElementById("form")
+  const btn = document.getElementById("btn")
+  var err1 = false
+  var err2 = false
+  var err3 = false
+  var err4 = false
+  var err5 = false
+  const p2 = document.getElementById("pt")
+  const p1 = document.getElementById("po")
+  function inputHandler(event, input, span, regex, inqe) {
+    var inputValue = event.target.value
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault()
+      if(err1 == true && err2 == true && err3 == true && err4 == true  && err5 == true){
+        p1.classList.add("hidden")
+        p2.classList.remove("hidden")
+      }
+      else if(err1 == false || err2 == false){
+        console.log(err1)
+        console.log(err2)
+      }
+    })
+    if(input == month || input == year){
+      if(inputValue == ""){
+        input.style.borderColor = "hsl(0, 100%, 66%)"
+        span.innerHTML = "Can't be blank"
+        span.style.color = "hsl(0, 100%, 66%)"
+        input.animate(animation,animationDuration)
+        err1 = false
+      }
+      else if(inputValue <= 0){
+        input.style.borderColor = "hsl(0, 100%, 66%)"
+        span.innerHTML = "Invalid"
+        span.style.color = "hsl(0, 100%, 66%)"
+        input.animate(animation,animationDuration)
+        err1 = false
+      }
+      else if(input == month){
+        if(inputValue >= 13 || inputValue < 0 ){
+          input.style.borderColor = "hsl(0, 100%, 66%)"
+          span.innerHTML = "Invalid"
+          span.style.color = "hsl(0, 100%, 66%)"
+          input.animate(animation,animationDuration)
+          err1 = false
+        }
+        else if(inputValue > 0 && inputValue <= 12){
+          err1 = true
+          input.style.borderColor = "hsl(0, 100%, 66%,0)"
+          span.innerHTML = ""
+          btn.disabled = false
+          if(inputValue.length == 1){
+            document.getElementById(inqe).innerHTML = ("0"+String(inputValue))
+          }
+          else if(inputValue.length == 2){
+            document.getElementById(inqe).innerHTML = (""+String(inputValue))
+          }
+        }
+      }
+      else if(input == year){
+        if(inputValue >= 23 || inputValue < 0 ){
+          input.style.borderColor = "hsl(0, 100%, 66%)"
+          span.innerHTML = "Invalid"
+          span.style.color = "hsl(0, 100%, 66%)"
+          input.animate(animation,animationDuration)
+          err2 = false
+        }
+        else if(inputValue > 0 && inputValue <= 22){
+          err2 = true
+          input.style.borderColor = "hsl(0, 100%, 66%,0)"
+          document.getElementById(inqe).innerHTML = ""
+          span.innerHTML = ""
+          btn.disabled = false
+          if(inputValue.length == 1){
+            document.getElementById(inqe).innerHTML = ("/ 0"+String(inputValue))
+          }
+          else if(inputValue.length == 2){
+            document.getElementById(inqe).innerHTML = ("/ "+String(inputValue))
+          }
+        }
+      }
+    }
+    if(inputValue == ""){
+      input.style.borderColor = "hsl(0, 100%, 66%)"
+      span.innerHTML = "Can't be blank"
+      span.style.color = "hsl(0, 100%, 66%)"
+      input.animate(animation,animationDuration)
+      if (input == number){
+        err3 = false
+        document.getElementById(inqe).innerHTML = ""
+      }
+      else if (input == name){
+        err4 = false
+      }
+      else if (input == cvc){
+        err5 = false
+      }
+      // else{
+      //   document.getElementById(inqe).innerHTML = ""
+      // }
+
+    }
+    else if(regex.test(inputValue.replace(/\s+/g, '')) == false){
+      input.style.borderColor = "hsl(0, 100%, 66%)"
+      span.innerHTML = "Wrong format"
+      span.style.color = "hsl(0, 100%, 66%)"
+      input.animate(animation,animationDuration)
+      if (input == number){
+        err3 = false
+        const maskOptions = {
+          mask: '0000 0000 0000 0000'
+        }
+        const mask = IMask(number, maskOptions)
+        document.getElementById(inqe).innerHTML = String(mask.value)
+      }
+      else{
+        err3 = false
+        document.getElementById(inqe).innerHTML = inputValue
+      }
+      if (input == name){
+        err4 = false
+      }
+      else if (input == cvc){
+        err5 = false
+      }
+    }
+    
+    else if(regex.test(inputValue.replace(/\s+/g, '')) == true){
+      input.style.borderColor = "hsl(0, 100%, 66%,0)"
+      span.innerHTML = ""
+      if (input == number){
+        err3 = true
+        const maskOptions = {
+          mask: '0000 0000 0000 0000'
+        }
+        const mask = IMask(number, maskOptions)
+        document.getElementById(inqe).innerHTML = String(mask.value)
+      }
+      else if (input == name){
+        err4 = true
+      }
+      else if (input == cvc){
+        err5 = true
+      }
+    }
+  }
+</script>
+
+<style>
+  .hidden{
+    display: none;
+  }
+  :root{
+    --tw--shadow: 0 1px 2px 0 rgb(0 0 0 / 1);
+    --tw--ring-offset-shadow: 0 0 #0000;
+    --tw--ring-shadow: 0 0 #0000;
+  }
+  .nw{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    border: 1px solid transparent;
+    outline: none;
+  }
+  
+  .nw:focus{
+    border: double 1px transparent;
+    border-radius: 6px;
+    background-image:linear-gradient(white,white),
+                      linear-gradient(to right, hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+</style>
